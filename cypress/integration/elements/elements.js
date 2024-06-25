@@ -12,12 +12,17 @@ export const ELEMENTS = {
         myCartOpened: '.vtex-minicart-2-x-minicartSideBarContentWrapper',
         bannerHome: 'section[aria-label="Banner principal da home"]',
     },
-    FIRST_SHELF: {
+    MORE_SELLERS: {
         recForYouShelf: "div[id='smarthint-for-you'] section[class*='vtex-store-component']>div[class*='flex']>div[class*='pr']>div[class*='vtex-flex-layout-']>div[class*='vtex-flex-layout-']>div[class*='vtex-rich-text-']",
-        cardProduct: '#slick-slide10',
+        sliderContainer:'.vtex-slider-layout-0-x-sliderLayoutContainer--shelf',
+        sliderTrack: '.vtex-slider-layout-0-x-sliderTrack--shelf',
+        cardProduct: '.vtex-product-summary-2-x-container--product-card',
         imgProduct: '.vtex-product-summary-2-x-image',
-        nameProduct: '.vtex-product-summary-2-x-nameContainer',
-        priceProduct: '.boleto .arcelormittal-product-price-custom-0-x-productPrice'
+        nameProduct: '.vtex-product-summary-2-x-productNameContainer--product-card',
+        priceProduct: '.arcelormittal-product-price-custom-0-x-productPrice--spotPriceValue',
+        addToCartBtn: '.vtex-add-to-cart-button-0-x-buttonText--add-to-cart-card',
+        rightArrow: '.vtex-slider-layout-0-x-sliderRightArrow',
+        leftArrow: '.vtex-slider-layout-0-x-sliderLeftArrow',
     },
 
     RELEASES_SHELF: {
@@ -34,5 +39,5 @@ export const ELEMENTS = {
         whatsapp: ':nth-child(2) > .vtex-flex-layout-0-x-flexCol--advantages-item',
         pickup: ':nth-child(3) > .vtex-flex-layout-0-x-flexCol--advantages-item',
         discount: ':nth-child(4) > .vtex-flex-layout-0-x-flexCol--advantages-item',
-    },
+  },
 }

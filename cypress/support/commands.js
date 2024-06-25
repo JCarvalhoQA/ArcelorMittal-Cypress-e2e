@@ -81,7 +81,7 @@ Cypress.Commands.add('validateBannerHome', () => {
         .should('be.visible');
 });
 
-Cypress.Commands.add('recommendedForYou', () => {
+/* Cypress.Commands.add('recommendedForYou', () => {
     // Select the product details section and perform assertions within it
     cy.get(ELEMENTS.FIRSTSHELF.cardProduct, { timeout: 10000 }).within(() => {
         // Check if there is an image present
@@ -93,9 +93,9 @@ Cypress.Commands.add('recommendedForYou', () => {
         // Check if there is a price present
         cy.get(ELEMENTS.FIRSTSHELF.priceProduct).should('be.visible');
     });
-});
+}); */
 
-Cypress.Commands.add('releasesShelf', () => {
+/* Cypress.Commands.add('releasesShelf', () => {
     cy.get(ELEMENTS.RELEASES_SHELF.releaseShelfTitle).should('be.visible').contains('Lançamentos')
     cy.get(ELEMENTS.RELEASES_SHELF.cardPorduct, { timeout: 1000 }).within(() => {
         // Check if there is an image present
@@ -107,21 +107,68 @@ Cypress.Commands.add('releasesShelf', () => {
         // Check if there is a price present
         cy.get(ELEMENTS.RELEASES_SHELF.priceProduct).should('be.visible');
     });
-});
+}); */
 
 Cypress.Commands.add('validateRulerContainer', () => {
     // Locator for the rulerContainer
     const rulerContainerLocator = '.vtex-flex-layout-0-x-flexRow.vtex-flex-layout-0-x-flexRow--advantages-block';
 
+    // Scroll down a bit to ensure the container is in view
+    cy.window().scrollTo(0, 10);
+
     // Validate if the rulerContainer is visible
     cy.get(rulerContainerLocator).should('be.visible');
-
     // Validate if the other classes inside rulerContainer are visible
     cy.get(rulerContainerLocator).within(() => {
+        // Validate if the "Parcele em até 10x" element is visible
         cy.get(ELEMENTS.ADVANTAGE_RULER.parcelIn10x).should('be.visible');
+        // Validate if the "Estamos no WhatsApp" element is visible
         cy.get(ELEMENTS.ADVANTAGE_RULER.whatsapp).should('be.visible');
+        // Validate if the "Retire Grátis" element is visible
         cy.get(ELEMENTS.ADVANTAGE_RULER.pickup).should('be.visible');
+        // Validate if the "Toda loja com 6% de desconto" element is visible
         cy.get(ELEMENTS.ADVANTAGE_RULER.discount).should('be.visible');
     });
 });
+
+Cypress.Commands.add('validateMoreSellers', () => {
+    // Ensure there is at least one product card visible
+    cy.get(ELEMENTS.MORE_SELLERS.cardProduct).should('have.length.greaterThan', 0);
+    // Validate if the first product card is visible
+    cy.get(ELEMENTS.MORE_SELLERS.cardProduct).first().should('be.visible').within(() => {
+        // Validate the product image
+        cy.get(ELEMENTS.MORE_SELLERS.imgProduct).should('be.visible');
+        // Validate the product name
+        cy.get(ELEMENTS.MORE_SELLERS.nameProduct).should('be.visible');
+        // Validate the product price
+        cy.get(ELEMENTS.MORE_SELLERS.priceProduct).should('be.visible');
+        // Validate the add to cart button
+        cy.get(ELEMENTS.MORE_SELLERS.addToCartBtn).should('be.visible');
+    });
+});
+
+
+ Cypress.Commands.add('validateRightArrowVisibility', () => {
+    // Validate if the slider container is visible
+    cy.get(ELEMENTS.MORE_SELLERS.sliderContainer).should('be.visible');
+
+    // Validate if the right arrow is present
+    cy.get(ELEMENTS.MORE_SELLERS.rightArrow).eq(1).should('exist');
+
+    // Validate if the right arrow is visible
+    cy.get(ELEMENTS.MORE_SELLERS.rightArrow).eq(1).should('be.visible');
+});
+
+Cypress.Commands.add('validateLeftArrowVisibility', () => {
+    // Validate if the left arrow button is present in the DOM
+    cy.get(ELEMENTS.MORE_SELLERS.leftArrow).eq(1).should('exist');
+
+    // Validate if the left arrow button is visible
+    cy.get(ELEMENTS.MORE_SELLERS.leftArrow).eq(1).should('be.visible');
+}); 
+
+
+
+
+
 

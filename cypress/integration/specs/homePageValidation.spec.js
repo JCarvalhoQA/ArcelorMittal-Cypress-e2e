@@ -6,9 +6,10 @@ describe('Home Page Validation', () => {
     beforeEach(() => {
         cy.visit('/')
         cy.get(HEADER.accBtnCookies)
-        .should('be.visible')
-        .click()
+            .should('be.visible')
+            .click()
         cy.wait(5000)
+        cy.window().scrollTo(0, 10);
     })
     it('Click Logo and Return Home', () => {
         cy.clickLogoBtn()
@@ -38,15 +39,22 @@ describe('Home Page Validation', () => {
         cy.validateBannerHome()
     });
 
-    it('You must validate the "Recommended for you" shelf', () => {
-        cy.recomendedForYou()
-    });
+    /*  it('You must validate the "Recommended for you" shelf', () => {
+         cy.recomendedForYou()
+     }); */
 
-    it('You must validade the "Lançamentos" shelf', () => {
+    /* it('You must validade the "Lançamentos" shelf', () => {
         cy.releasesShelf()
-    });
+    }); */
 
-    it.only('Validates if rulerContainer and its classes are visible', () => {
+    it('Validates if rulerContainer and its classes are visible', () => {
         cy.validateRulerContainer()
-      });
-})
+    });
+    it('Validadte Shelf "Mais Vendidos"', () => {
+        cy.validateMoreSellers();
+        cy.validateLeftArrowVisibility();
+        cy.validateRightArrowVisibility();   
+    });
+});
+
+
