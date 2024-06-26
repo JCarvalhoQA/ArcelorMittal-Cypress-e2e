@@ -148,7 +148,7 @@ Cypress.Commands.add('validateMoreSellers', () => {
 });
 
 
- Cypress.Commands.add('validateRightArrowVisibility', () => {
+Cypress.Commands.add('rightArrowMoreSellers', () => {
     // Validate if the slider container is visible
     cy.get(ELEMENTS.MORE_SELLERS.sliderContainer).should('be.visible');
 
@@ -159,14 +159,97 @@ Cypress.Commands.add('validateMoreSellers', () => {
     cy.get(ELEMENTS.MORE_SELLERS.rightArrow).eq(1).should('be.visible');
 });
 
-Cypress.Commands.add('validateLeftArrowVisibility', () => {
+Cypress.Commands.add('LeftArrowMoreSellers', () => {
     // Validate if the left arrow button is present in the DOM
     cy.get(ELEMENTS.MORE_SELLERS.leftArrow).eq(1).should('exist');
 
     // Validate if the left arrow button is visible
     cy.get(ELEMENTS.MORE_SELLERS.leftArrow).eq(1).should('be.visible');
-}); 
+});
+Cypress.Commands.add('validateProducHighlights', () => {
+    // Ensure there is at least one product card visible
+    cy.get(ELEMENTS.HIGHLIGHTS_SHELF.cardProduct).should('have.length.greaterThan', 4);
+    // Validate if the first product card is visible
+    cy.get(ELEMENTS.HIGHLIGHTS_SHELF.cardProduct).first().should('be.visible').within(() => {
+        // Validate the product image
+        cy.get(ELEMENTS.HIGHLIGHTS_SHELF.imgProduct).should('be.visible');
+        // Validate the product name
+        cy.get(ELEMENTS.HIGHLIGHTS_SHELF.nameProduct).should('be.visible');
+        // Validate the product price
+        cy.get(ELEMENTS.HIGHLIGHTS_SHELF.priceProduct).should('be.visible');
+        // Validate the add to cart button
+        cy.get(ELEMENTS.HIGHLIGHTS_SHELF.addToCartBtn).should('be.visible');
+    });
+});
 
+Cypress.Commands.add('rightArrowProductHighlights', () => {
+    // Validate if the slider container is visible
+    cy.get(ELEMENTS.HIGHLIGHTS_SHELF.sliderContainer).should('be.visible');
+
+    // Validate if the right arrow is present
+    cy.get(ELEMENTS.HIGHLIGHTS_SHELF.rightArrow).eq(2).should('exist');
+
+    // Validate if the right arrow is visible
+    cy.get(ELEMENTS.HIGHLIGHTS_SHELF.rightArrow).eq(2).should('be.visible');
+});
+
+Cypress.Commands.add('LeftArrowProductHighlights', () => {
+    // Validate if the left arrow button is present in the DOM
+    cy.get(ELEMENTS.HIGHLIGHTS_SHELF.leftArrow).eq(2).should('exist');
+
+    // Validate if the left arrow button is visible
+    cy.get(ELEMENTS.HIGHLIGHTS_SHELF.leftArrow).eq(2).should('be.visible');
+});
+
+Cypress.Commands.add('validateAllSliderTrackContainers', () => {
+    cy.get(ELEMENTS.CATEGORY_CAROUSEL.categoryContainer).eq(3).each(($el, index, $list) => {
+        cy.wrap($el)  // Wrap the element for Cypress manipulation
+            .should('exist')  // Check if the element exists in the DOM
+            .and('be.visible');  // Check if the element is visible on the page
+    });
+});
+
+// Cypress command to validate elements in the image banner
+Cypress.Commands.add('validateBannerFraud', () => {
+    cy.get(ELEMENTS.BANNER_FRAUD.bannerContainer)
+        .should('exist')  // Check if the banner container exists
+        .and('be.visible')  // Check if the banner container is visible
+        .within(() => {
+            // Validate the image link
+            cy.get(ELEMENTS.BANNER_FRAUD.imgLink)
+                .should('exist')  // Check if the image link exists
+                .should('have.attr', 'href', '/fique-em-alerta');  // Check if href attribute is correct
+
+            // Validate the image source and alt attribute
+            cy.get('img.vtex-store-components-3-x-imageElement')  // Assuming this is the correct selector for the image
+                .should('exist')  // Check if the image exists
+                .and('have.attr', 'src', 'https://arcelormittal.vtexassets.com/assets/vtex.file-manager-graphql/images/696e547a-2ee4-42b6-9fd1-e0d84d7e05ff___94c1f96b86aba07808b2127c0ef14e15.jpg')
+                .and('have.attr', 'alt', 'Vantagens exclusivas');  // Check if alt attribute is correct
+        });
+});
+
+
+
+
+Cypress.Commands.add('validateNewsletterForm', () => {
+    cy.scrollTo('bottom');
+    // Validate the container
+    cy.get(ELEMENTS.NEWSLETTER_FORM.newsletterContainer)
+        .should('exist')  // Check if the container exists
+        .and('be.visible');  // Check if the container is visible
+
+    // Validate the title
+    cy.get(ELEMENTS.NEWSLETTER_FORM.newsLetterTitle)
+        .should('exist')  // Check if the title exists
+        .and('be.visible');  // Check if the title is visible
+    // Add specific checks for the title if necessary
+
+    // Validate the submit button
+    cy.get(ELEMENTS.NEWSLETTER_FORM.newsLetterBtn)
+        .should('exist')  // Check if the button exists
+        .and('be.visible');  // Check if the button is visible
+    cy.get(ELEMENTS.NEWSLETTER_FORM.newsLetterBtn).contains('Cadastrar')
+});
 
 
 

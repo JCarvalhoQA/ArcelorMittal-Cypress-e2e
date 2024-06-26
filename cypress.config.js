@@ -8,6 +8,7 @@ module.exports = defineConfig({
     defaultCommandTimeout: 10000, // Timeout padrão para comandos
     viewportWidth: 1920,
     viewportHeight: 1080,
+    browser: 'chrome, edge',
     setupNodeEvents(on, config) {
       // configure plugins here if needed
     },

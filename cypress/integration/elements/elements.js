@@ -25,12 +25,17 @@ export const ELEMENTS = {
         leftArrow: '.vtex-slider-layout-0-x-sliderLeftArrow',
     },
 
-    RELEASES_SHELF: {
-        releaseShelfTitle: "div[id='smarthint-news'] section[class*='vtex-store-component']>div[class*='flex']>div[class*='pr']>div[class*='vtex-flex-layout-']>div[class*='vtex-flex-layout-']:nth-of-type(1) p[class*='lh-copy']",
-        cardPorduct: '#slick-slide00',
-        imgProduct: 'div.vtex-product-summary-2-x-imageWrapper img',
-        nameProduct: 'h3.vtex-product-summary-2-x-productNameContainer span',
-        priceProduct: 'span.arcelormittal-product-price-custom-0-x-productPrice',
+    HIGHLIGHTS_SHELF: {
+        productHighlightsShelf: "div[class]:nth-of-type(5) h1[class*='vtex-rich-text-']",
+        sliderContainer:'.vtex-slider-layout-0-x-sliderLayoutContainer--shelf',
+        sliderTrack: '.vtex-slider-layout-0-x-sliderTrack--shelf',
+        cardProduct: '.vtex-product-summary-2-x-container',
+        imgProduct: '.vtex-product-summary-2-x-image',
+        nameProduct: '.vtex-product-summary-2-x-productNameContainer--product-card',
+        priceProduct: '.arcelormittal-product-price-custom-0-x-productPrice--spotPriceValue',
+        addToCartBtn: '.vtex-add-to-cart-button-0-x-buttonText--add-to-cart-card',
+        rightArrow: '.vtex-slider-layout-0-x-sliderRightArrow',
+        leftArrow: '.vtex-slider-layout-0-x-sliderLeftArrow',
     },
 
     ADVANTAGE_RULER: {
@@ -40,4 +45,23 @@ export const ELEMENTS = {
         pickup: ':nth-child(3) > .vtex-flex-layout-0-x-flexCol--advantages-item',
         discount: ':nth-child(4) > .vtex-flex-layout-0-x-flexCol--advantages-item',
   },
+
+    CATEGORY_CAROUSEL: {
+        carouselTitle: '.vtex-rich-text-0-x-heading--carouselCategoryTitle',
+        carouselSubTitle: '.vtex-rich-text-0-x-paragraph--carouselCategorySubtitle',
+        categorySlides: '.vtex-slider-layout-0-x-slide--carouselCategorySlider', 
+        categoryContainer: '.vtex-slider-layout-0-x-sliderTrackContainer',
+    },
+
+    BANNER_FRAUD: {
+        bannerContainer: '.vtex-flex-layout-0-x-flexRow.vtex-flex-layout-0-x-flexRow--imageUnicBanner',
+        imgLink: ".vtex-store-components-3-x-imageElementLink",
+        imgContainer: 'a[href="/fique-em-alerta"]',
+    },
+
+    NEWSLETTER_FORM: {
+        newsletterContainer: "div[class*='vtex-store-footer-'] > div[class*='vtex-flex-layout-']:nth-of-type(1) > div[class*='flex'] > div[class*='pr'] > div[class*='vtex-flex-layout-']",
+        newsLetterTitle: '.vtex-rich-text-0-x-paragraph.vtex-rich-text-0-x-paragraph--newsletter-title-text',
+        newsLetterBtn: '.vtex-store-link-0-x-label.vtex-store-link-0-x-label--newsletter-submit-button'
+    },
 }

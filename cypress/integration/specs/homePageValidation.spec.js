@@ -50,11 +50,29 @@ describe('Home Page Validation', () => {
     it('Validates if rulerContainer and its classes are visible', () => {
         cy.validateRulerContainer()
     });
-    it('Validadte Shelf "Mais Vendidos"', () => {
+    it('Validate Shelf "Mais Vendidos"', () => {
         cy.validateMoreSellers();
-        cy.validateLeftArrowVisibility();
-        cy.validateRightArrowVisibility();   
+        cy.LeftArrowMoreSellers();
+        cy.rightArrowMoreSellers();
     });
+
+    it('Validate Shelf "Produtos Destaques"', () => {
+        cy.validateMoreSellers();
+        cy.LeftArrowProductHighlights();
+        cy.rightArrowProductHighlights();
+    });
+
+    it('Validate Carousel Category', () => {
+        cy.validateAllSliderTrackContainers();
+    });
+
+    it.only('Banner fraud Exists and it is Visible', () => {
+        cy.validateBannerFraud()
+    })
+
+    it('NewLatter Exists and it is Visible', () => {
+        cy.validateNewsletterForm()
+    })
 });
 
 
