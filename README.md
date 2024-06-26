@@ -58,15 +58,15 @@ Na interface gráfica, você pode selecionar os testes para executar e observar 
 ```plaintext
 nome-do-repositorio/
 ├── cypress/
-│   ├── fixtures/                # Arquivos de dados para testes
-│   ├── integration/             # Arquivos de testes Cypress
-│   ├── plugins/                 # Plugins do Cypress
-│   ├── support/                 # Arquivos de suporte, como comandos personalizados
-├── node_modules/                # Dependências do projeto
-├── .gitignore                   # Arquivos e diretórios ignorados pelo Git
-├── cypress.json                 # Configurações do Cypress
-├── package.json                 # Configurações do projeto Node.js e scripts npm
-├── README.md                    # Documentação do projeto (este arquivo)
+│   ├── fixtures/                
+│   ├── integration/             
+│   ├── plugins/                 
+│   ├── support/                 
+├── node_modules/               
+├── .gitignore                   
+├── cypress.json                 
+├── package.json                 
+├── README.md                    
 ```
 
 ## Contribuição
