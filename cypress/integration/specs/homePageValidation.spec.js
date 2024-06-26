@@ -47,7 +47,7 @@ describe('Home Page Validation', () => {
         cy.releasesShelf()
     }); */
 
-    it('Validates if rulerContainer and its classes are visible', () => {
+    it.only('Validates if rulerContainer and its classes are visible', () => {
         cy.validateRulerContainer()
     });
     it('Validate Shelf "Mais Vendidos"', () => {
@@ -66,7 +66,7 @@ describe('Home Page Validation', () => {
         cy.validateAllSliderTrackContainers();
     });
 
-    it.only('Banner fraud Exists and it is Visible', () => {
+    it('Banner fraud Exists and it is Visible', () => {
         cy.validateBannerFraud()
     })
 
