@@ -1,5 +1,5 @@
+![image](https://github.com/JCarvalhoQA/ArcelorMittal-Cypress-e2e/assets/173073444/dc074d06-770f-4058-9772-635a103abc9c)
 
-![image](https://github.com/JCarvalhoQA/ArcelorMittal-Cypress-e2e/assets/173073444/4a06a895-c5b0-45b3-8b7d-53b000b4a1b3)
 
 
 # Cypress E2E Testing
