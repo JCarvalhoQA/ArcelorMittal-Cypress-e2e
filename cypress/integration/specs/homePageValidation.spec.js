@@ -66,7 +66,7 @@ describe('Home Page Validation', () => {
         cy.validateAllSliderTrackContainers();
     });
 
-    it.only('Banner fraud Exists and it is Visible', () => {
+    it('Banner fraud Exists and it is Visible', () => {
         cy.validateBannerFraud()
     })
 
