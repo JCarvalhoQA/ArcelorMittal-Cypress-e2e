@@ -2,7 +2,7 @@ export const ELEMENTS = {
     HEADER: {
         logo: "svg[class*='logo-icon']",
         accBtnCookies: '.arcelormittal-cookies-consent-0-x-cookies-consent__modal-allow',
-        searchInput: "input[id='smarthint-search-input']",
+        searchInput: "input[id='downshift-1-input']",
         lgnBtnOrRegister: "div[class='relative'] div[class*='vtex-button']",
         lgnBtnKeyInEmail: "li[class*='vtex-login-']:nth-of-type(1) div[class*='vtex-button']",
         lgnBtnEmailPassword: "li[class*='vtex-login-']:nth-of-type(2) div[class*='vtex-button']",
