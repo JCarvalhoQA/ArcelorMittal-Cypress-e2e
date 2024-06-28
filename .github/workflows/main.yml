@@ -1,20 +1,11 @@
 name: Run Regression tests
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
-
+on: [push]
 jobs:
-  cypress-run:
-      runs-on: ubuntu-latest
-      steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-      - name: Cypress run
-        uses: cypress-io/github-action@v6
-        with:
-          build: npx run build
-          start: npx start
+ cypress-run:
+   runs-on: ubuntu-latest
+   steps:
+     - name: Checkout repository
+       uses: actions/checkout@v3
+     - name: Cypress run
+       uses: cypress-io/github-action@v6
+       
