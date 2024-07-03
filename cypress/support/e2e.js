@@ -14,7 +14,17 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import './commands'
+
+import './commands/home-commands'
+import 'cypress-plugin-xhr-toggle' 
+before(() => {
+    cy.window().then((win) => {
+        cy.stub(win, 'fetch').callsFake((...args) => {
+            return win.fetch(...args);
+        });
+    });
+});
+
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
