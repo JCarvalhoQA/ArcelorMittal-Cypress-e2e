@@ -1,38 +1,39 @@
 /// <reference types="cypress" />
-import { ELEMENTS } from "../elements/elements"
+import { ELEMENTS } from "../../support/elements/home/elements"
 const HEADER = ELEMENTS.HEADER;
 
 describe('Home Page Validation', () => {
     beforeEach(() => {
         cy.visit('/')
-        cy.get(HEADER.accBtnCookies)
+        cy.get(HEADER.btnAcceptCookies)
             .should('be.visible')
             .click()
+        
         cy.wait(5000)
         cy.window().scrollTo(0, 10);
     })
     it('Click Logo and Return Home', () => {
-        cy.clickLogoBtn()
+        cy.btnLogoClick()
     });
 
     it('Type and Search Product', () => {
-        cy.searchProduct()
+        cy.inputSearchProduct('arame')
     });
 
-    it('Login and Register Button', () => {
-        cy.lgnRegBtn()
+    it('Button Login', () => {
+        cy.btnLogin()
     });
 
     it('Shopkeeper Menu', () => {
-        cy.shopkeeperBtn()
+        cy.btnShopkeeper()
     });
 
     it('Click Open My Cart', () => {
-        cy.myCartBtn()
+        cy.btnMyCart()
     });
 
     it('Menu Header is Visible', () => {
-        cy.validateMenuLink()
+        cy.menuLinkValidate()
     });
 
     it('Banner Home is Visible', () => {
@@ -47,7 +48,7 @@ describe('Home Page Validation', () => {
         cy.releasesShelf()
     }); */
 
-    it.only('Validates if rulerContainer and its classes are visible', () => {
+    it('Validates if rulerContainer and its classes are visible', () => {
         cy.validateRulerContainer()
     });
     it('Validate Shelf "Mais Vendidos"', () => {
@@ -73,6 +74,9 @@ describe('Home Page Validation', () => {
     it('NewLatter Exists and it is Visible', () => {
         cy.validateNewsletterForm()
     })
+
+    it('Validate Shelf "Mais Buscados', () => {
+        cy.mostSearchedShelf()
+    })
+
 });
-
-

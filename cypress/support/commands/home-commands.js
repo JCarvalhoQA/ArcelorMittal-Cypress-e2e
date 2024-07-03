@@ -1,38 +1,41 @@
 /// <reference types="cypress" />
-import { ELEMENTS } from "../integration/elements/elements"
 
-Cypress.Commands.add('clickLogoBtn', () => {
-    cy.get(ELEMENTS.HEADER.logo)
+import { ELEMENTS } from "../elements/home/elements"
+
+Cypress.Commands.add('btnLogoClick', () => {
+    cy.get(ELEMENTS.HEADER.btnLogo)
         .should('be.visible')
         .click()
         .url().should('be.equal', 'https://loja.arcelormittal.com.br/');
 });
 
-Cypress.Commands.add('searchProduct', () => {
-    return cy.get(ELEMENTS.HEADER.searchInput)
+Cypress.Commands.add('inputSearchProduct', (text) => {
+    cy.get(ELEMENTS.HEADER.inputSearch)
         .should('be.visible')
-        .type('arame');
-
-    cy.url({ timeout: 10000 }).should('include', '/#&search-term=arame');
+        .type(text);
+    cy.get(ELEMENTS.HEADER.listResult)
+        .contains(text)
+        .type('{enter}');
+    cy.url().should('eq', `https://loja.arcelormittal.com.br/${text}?_q=&map=ft`);
 });
 
-Cypress.Commands.add('lgnRegBtn', () => {
-    cy.get(ELEMENTS.HEADER.lgnBtnOrRegister)
+Cypress.Commands.add('btnLogin', () => {
+    cy.get(ELEMENTS.HEADER.btnLogin)
         .click()
         .should('be.visible');
 
-    cy.get(ELEMENTS.HEADER.lgnBtnKeyInEmail)
+    cy.get(ELEMENTS.HEADER.btnLoginEmail)
         .should('be.visible');
 
-    cy.get(ELEMENTS.HEADER.lgnBtnEmailPassword)
+    cy.get(ELEMENTS.HEADER.btnEmailPassword)
         .should('be.visible');
 
-    cy.get(ELEMENTS.HEADER.lgnBtnGoogle)
+    cy.get(ELEMENTS.HEADER.btnSocial)
         .should('be.visible');
 });
 
-Cypress.Commands.add('shopkeeperBtn', () => {
-    cy.get(ELEMENTS.HEADER.shopkeeperBtn)
+Cypress.Commands.add('btnShopkeeper', () => {
+    cy.get(ELEMENTS.HEADER.btnShopkeeper)
         .should('be.visible')
         .trigger('mouseover');
 
@@ -40,18 +43,27 @@ Cypress.Commands.add('shopkeeperBtn', () => {
         .should('exist');
 });
 
-Cypress.Commands.add('myCartBtn', () => {
-    cy.get(ELEMENTS.HEADER.myCartBtn)
+Cypress.Commands.add('btnMyCart', () => {
+    cy.get(ELEMENTS.HEADER.btnMiniCart)
         .should('be.visible')
         .click();
-
-    cy.get(ELEMENTS.HEADER.myCartOpened)
+    cy.get(ELEMENTS.HEADER.containerMinicartEmpty)
         .should('be.visible');
 });
 
-Cypress.Commands.add('validateMenuLink', () => {
-    cy.get('ul.vtex-menu-2-x-menuContainer--header-desktop')
-        .should('be.visible');
+Cypress.Commands.add('menuLinkValidate', () => {
+    cy.get(ELEMENTS.HEADER.containerHeader).eq(1)
+    .find(ELEMENTS.HEADER.containerUlHeader)
+    .find(ELEMENTS.HEADER.containerLiheader)
+    .each(($el) => {
+      cy.wrap($el)
+        .should('be.visible')
+        .find(ELEMENTS.HEADER.containerMenuHeader)
+        .invoke('text')
+        .then((text) => {
+          expect(text.trim()).to.be.not.empty;
+        });
+    });
 });
 
 Cypress.Commands.add('validateBannerHome', () => {
@@ -91,7 +103,7 @@ Cypress.Commands.add('validateRulerContainer', () => {
 });
 
 Cypress.Commands.add('validateMoreSellers', () => {
-    cy.get(ELEMENTS.MORE_SELLERS.cardProduct).should('have.length.greaterThan', 0);
+    cy.get('#slider-items-ini1x7n > .vtex-slider-layout-0-x-sliderTrackContainer > [data-testid="slider-track"] > .vtex-slider-layout-0-x-slide--firstVisible.vtex-slider-layout-0-x-slide--visible > .vtex-slider-layout-0-x-slideChildrenContainer > .vtex-product-summary-2-x-container');
     cy.get(ELEMENTS.MORE_SELLERS.cardProduct).first().should('be.visible').within(() => {
         cy.get(ELEMENTS.MORE_SELLERS.imgProduct).should('be.visible');
         cy.get(ELEMENTS.MORE_SELLERS.nameProduct).should('be.visible');
@@ -154,6 +166,16 @@ Cypress.Commands.add('validateBannerFraud', () => {
                 .and('have.attr', 'src', 'https://arcelormittal.vtexassets.com/assets/vtex.file-manager-graphql/images/696e547a-2ee4-42b6-9fd1-e0d84d7e05ff___94c1f96b86aba07808b2127c0ef14e15.jpg')
                 .and('have.attr', 'alt', 'Vantagens exclusivas');
         });
+});
+
+Cypress.Commands.add('mostSearchedShelf', () => {
+    cy.get(ELEMENTS.MOST_SEARCHED_SHELF.cardProduct).should('have.length.greaterThan', 0);
+    cy.get(ELEMENTS.MOST_SEARCHED_SHELF.cardProduct).first().should('be.visible').within(() => {
+        cy.get(ELEMENTS.MOST_SEARCHED_SHELF.imgProduct).should('be.visible');
+        cy.get(ELEMENTS.MOST_SEARCHED_SHELF.nameProduct).should('be.visible');
+        cy.get(ELEMENTS.MOST_SEARCHED_SHELF.priceProduct).should('be.visible');
+        cy.get(ELEMENTS.MOST_SEARCHED_SHELF.addToCartBtn).should('be.visible');
+    });
 });
 
 Cypress.Commands.add('validateNewsletterForm', () => {
