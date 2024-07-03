@@ -18,8 +18,6 @@ export const ELEMENTS = {
         containerUlHeader:'ul.vtex-menu-2-x-menuContainer',
         containerLiheader: 'li.vtex-menu-2-x-menuItem',
         containerMenuHeader:'.vtex-menu-2-x-styledLinkContent'
-
-
     },
     MORE_SELLERS: {
         recForYouShelf: "div[id='smarthint-for-you'] section[class*='vtex-store-component']>div[class*='flex']>div[class*='pr']>div[class*='vtex-flex-layout-']>div[class*='vtex-flex-layout-']>div[class*='vtex-rich-text-']",
