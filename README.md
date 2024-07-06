@@ -1,4 +1,5 @@
-![image](https://github.com/JCarvalhoQA/ArcelorMittal-Cypress-e2e/assets/173073444/059cdf5c-5ed9-4e29-bded-9e05c1363792)
+![image](https://github.com/JCarvalhoQA/ArcelorMittal-Cypress-e2e/assets/173073444/dc074d06-770f-4058-9772-635a103abc9c)
+
 
 
 

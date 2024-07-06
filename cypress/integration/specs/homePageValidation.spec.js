@@ -1,10 +1,12 @@
 /// <reference types="cypress" />
 import { ELEMENTS } from "../../support/elements/home/elements"
+import { ELEMENTS } from "../../support/elements/home/elements"
 const HEADER = ELEMENTS.HEADER;
 
 describe('Home Page Validation', () => {
     beforeEach(() => {
         cy.visit('/')
+        cy.get(HEADER.btnAcceptCookies)
         cy.get(HEADER.btnAcceptCookies)
             .should('be.visible')
             .click()
@@ -14,17 +16,22 @@ describe('Home Page Validation', () => {
     })
     it('Click Logo and Return Home', () => {
         cy.btnLogoClick()
+        cy.btnLogoClick()
     });
 
     it('Type and Search Product', () => {
+        cy.inputSearchProduct('arame')
         cy.inputSearchProduct('arame')
     });
 
     it('Button Login', () => {
         cy.btnLogin()
+    it('Button Login', () => {
+        cy.btnLogin()
     });
 
     it('Shopkeeper Menu', () => {
+        cy.btnShopkeeper()
         cy.btnShopkeeper()
     });
 
@@ -33,6 +40,7 @@ describe('Home Page Validation', () => {
     });
 
     it('Menu Header is Visible', () => {
+        cy.menuLinkValidate()
         cy.menuLinkValidate()
     });
 
@@ -67,4 +75,9 @@ describe('Home Page Validation', () => {
     it('NewLatter Exists and it is Visible', () => {
         cy.validateNewsletterForm()
     })
+
+    it('Validate Shelf "Mais Buscados', () => {
+        cy.mostSearchedShelf()
+    })
+
 });
