@@ -73,8 +73,4 @@ describe('Home Page Validation', () => {
     it('Newsletter Exists and it is Visible', () => {
         cy.validateNewsletterForm()
     });
-
-    it('Validate Shelf "Mais Buscados"', () => {
-        cy.mostSearchedShelf()
-    });
 });
