@@ -28,7 +28,7 @@ describe('Home Page Validation', () => {
         cy.btnShopkeeper()
     });
 
-    it('Click Open My Cart', () => {
+    it.only('Click Open My Cart', () => {
         cy.btnMyCart()
     });
 
@@ -68,5 +68,3 @@ describe('Home Page Validation', () => {
         cy.validateNewsletterForm()
     })
 });
-
-

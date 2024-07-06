@@ -191,12 +191,9 @@ Cypress.Commands.add('validateBannerFraud', (imgLinkHref, imgSrc, imgAlt) => {
         .should('exist')
         .and('be.visible')
         .within(() => {
-            // Valida o link da imagem
             cy.get(ELEMENTS.BANNER_FRAUD.imgLink)
                 .should('exist')
                 .and('have.attr', 'href', imgLinkHref);
-
-            // Valida a imagem
             cy.get('img.vtex-store-components-3-x-imageElement')
                 .should('exist')
                 .and('have.attr', 'src', imgSrc)
@@ -236,16 +233,6 @@ Cypress.Commands.add('launchProductShelf', () => {
         cy.get(ELEMENTS.LAUNCH_PRODUCT_SHELF.buttonAdd)
             .should('contain.text', 'Adicionar')
             .and('be.visible');
-    });
-});
-
-Cypress.Commands.add('mostSearchedShelf', () => {
-    cy.get(ELEMENTS.MOST_SEARCHED_SHELF.cardProduct).should('have.length.greaterThan', 0);
-    cy.get(ELEMENTS.MOST_SEARCHED_SHELF.cardProduct).first().should('be.visible').within(() => {
-        cy.get(ELEMENTS.MOST_SEARCHED_SHELF.imgProduct).should('be.visible');
-        cy.get(ELEMENTS.MOST_SEARCHED_SHELF.nameProduct).should('be.visible');
-        cy.get(ELEMENTS.MOST_SEARCHED_SHELF.priceProduct).should('be.visible');
-        cy.get(ELEMENTS.MOST_SEARCHED_SHELF.addToCartBtn).should('be.visible');
     });
 });
 
