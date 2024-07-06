@@ -8,7 +8,7 @@ describe('Home Page Validation', () => {
         cy.get(HEADER.btnAcceptCookies)
             .should('be.visible')
             .click()
-        
+
         cy.wait(5000)
         cy.window().scrollTo(0, 10);
     })
@@ -37,48 +37,36 @@ describe('Home Page Validation', () => {
     });
 
     it('Banner Home is Visible', () => {
-        cy.validateBannerHome()
+        cy.bannerHomeValidate()
     });
-
-    /*  it('You must validate the "Recommended for you" shelf', () => {
-         cy.recomendedForYou()
-     }); */
-
-    /* it('You must validade the "Lançamentos" shelf', () => {
-        cy.releasesShelf()
-    }); */
 
     it('Validates if rulerContainer and its classes are visible', () => {
-        cy.validateRulerContainer()
+        cy.containerRulerValidate()
     });
-    it('Validate Shelf "Mais Vendidos"', () => {
-        cy.validateMoreSellers();
-        cy.LeftArrowMoreSellers();
-        cy.rightArrowMoreSellers();
-    });
-
-    it('Validate Shelf "Produtos Destaques"', () => {
-        cy.validateMoreSellers();
-        cy.LeftArrowProductHighlights();
-        cy.rightArrowProductHighlights();
-    });
-
-    it('Validate Carousel Category', () => {
-        cy.validateAllSliderTrackContainers();
-    });
-
-    it('Banner fraud Exists and it is Visible', () => {
-        cy.validateBannerFraud()
+    it('Validate Shelf "Mais Buscados" should validate elements in the product card', () => {
+        cy.bestSellerShelf()
     })
-
+        ;
+    it('Validate Shelf "Produtos Destaques" should validate elements in the product card', () => {
+        cy.highlightShelf()
+    });
+    it('Validate Carousel Category', () => {
+        cy.carouselCategory()
+    });
+    it('Banner fraud Exists and it is Visible', () => {
+        cy.validateBannerFraud(
+            '/fique-em-alerta',
+            'https://arcelormittal.vtexassets.com/assets/vtex.file-manager-graphql/images/696e547a-2ee4-42b6-9fd1-e0d84d7e05ff___94c1f96b86aba07808b2127c0ef14e15.jpg',
+            'Vantagens exclusivas'
+        );
+    })
+    
+    it('Validate Shelf "Mais buscados" should validate elements in the product card', () => {
+        cy.launchProductShelf()
+    })
     it('NewLatter Exists and it is Visible', () => {
         cy.validateNewsletterForm()
     })
-
-    it('Validate Shelf "Mais Buscados', () => {
-        cy.mostSearchedShelf()
-    })
-
 });
 
 

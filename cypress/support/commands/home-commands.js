@@ -53,42 +53,25 @@ Cypress.Commands.add('btnMyCart', () => {
 
 Cypress.Commands.add('menuLinkValidate', () => {
     cy.get(ELEMENTS.HEADER.containerHeader).eq(1)
-    .find(ELEMENTS.HEADER.containerUlHeader)
-    .find(ELEMENTS.HEADER.containerLiheader)
-    .each(($el) => {
-      cy.wrap($el)
-        .should('be.visible')
-        .find(ELEMENTS.HEADER.containerMenuHeader)
-        .invoke('text')
-        .then((text) => {
-          expect(text.trim()).to.be.not.empty;
+        .find(ELEMENTS.HEADER.containerUlHeader)
+        .find(ELEMENTS.HEADER.containerLiheader)
+        .each(($el) => {
+            cy.wrap($el)
+                .should('be.visible')
+                .find(ELEMENTS.HEADER.containerMenuHeader)
+                .invoke('text')
+                .then((text) => {
+                    expect(text.trim()).to.be.not.empty;
+                });
         });
-    });
 });
 
-Cypress.Commands.add('validateBannerHome', () => {
-    cy.get(ELEMENTS.HEADER.bannerHome)
+Cypress.Commands.add('bannerHomeValidate', () => {
+    cy.get(ELEMENTS.BANNER.containerBanner)
         .should('be.visible');
 });
 
-Cypress.Commands.add('recommendedForYou', () => {
-    cy.get(ELEMENTS.FIRSTSHELF.cardProduct, { timeout: 10000 }).within(() => {
-        cy.get(ELEMENTS.FIRSTSHELF.imgProduct).should('be.visible');
-        cy.get(ELEMENTS.FIRSTSHELF.nameProduct).should('be.visible');
-        cy.get(ELEMENTS.FIRSTSHELF.priceProduct).should('be.visible');
-    });
-});
-
-Cypress.Commands.add('releasesShelf', () => {
-    cy.get(ELEMENTS.RELEASES_SHELF.releaseShelfTitle).should('be.visible').contains('Lançamentos')
-    cy.get(ELEMENTS.RELEASES_SHELF.cardPorduct, { timeout: 1000 }).within(() => {
-        cy.get(ELEMENTS.RELEASES_SHELF.imgProduct).should('be.visible');
-        cy.get(ELEMENTS.RELEASES_SHELF.nameProduct).should('be.visible');
-        cy.get(ELEMENTS.RELEASES_SHELF.priceProduct).should('be.visible');
-    });
-});
-
-Cypress.Commands.add('validateRulerContainer', () => {
+Cypress.Commands.add('containerRulerValidate', () => {
     const rulerContainerLocator = '.vtex-flex-layout-0-x-flexRow.vtex-flex-layout-0-x-flexRow--advantages-block';
 
     cy.window().scrollTo(0, 10);
@@ -102,70 +85,158 @@ Cypress.Commands.add('validateRulerContainer', () => {
     });
 });
 
-Cypress.Commands.add('validateMoreSellers', () => {
-    cy.get('#slider-items-ini1x7n > .vtex-slider-layout-0-x-sliderTrackContainer > [data-testid="slider-track"] > .vtex-slider-layout-0-x-slide--firstVisible.vtex-slider-layout-0-x-slide--visible > .vtex-slider-layout-0-x-slideChildrenContainer > .vtex-product-summary-2-x-container');
-    cy.get(ELEMENTS.MORE_SELLERS.cardProduct).first().should('be.visible').within(() => {
-        cy.get(ELEMENTS.MORE_SELLERS.imgProduct).should('be.visible');
-        cy.get(ELEMENTS.MORE_SELLERS.nameProduct).should('be.visible');
-        cy.get(ELEMENTS.MORE_SELLERS.priceProduct).should('be.visible');
-        cy.get(ELEMENTS.MORE_SELLERS.addToCartBtn).should('be.visible');
-    });
-});
-
-Cypress.Commands.add('rightArrowMoreSellers', () => {
-    cy.get(ELEMENTS.MORE_SELLERS.sliderContainer).should('be.visible');
-    cy.get(ELEMENTS.MORE_SELLERS.rightArrow).eq(1).should('exist');
-    cy.get(ELEMENTS.MORE_SELLERS.rightArrow).eq(1).should('be.visible');
-});
-
-Cypress.Commands.add('LeftArrowMoreSellers', () => {
-    cy.get(ELEMENTS.MORE_SELLERS.leftArrow).eq(1).should('exist');
-    cy.get(ELEMENTS.MORE_SELLERS.leftArrow).eq(1).should('be.visible');
-});
-
-Cypress.Commands.add('validateProducHighlights', () => {
-    cy.get(ELEMENTS.HIGHLIGHTS_SHELF.cardProduct).should('have.length.greaterThan', 4);
-    cy.get(ELEMENTS.HIGHLIGHTS_SHELF.cardProduct).first().should('be.visible').within(() => {
-        cy.get(ELEMENTS.HIGHLIGHTS_SHELF.imgProduct).should('be.visible');
-        cy.get(ELEMENTS.HIGHLIGHTS_SHELF.nameProduct).should('be.visible');
-        cy.get(ELEMENTS.HIGHLIGHTS_SHELF.priceProduct).should('be.visible');
-        cy.get(ELEMENTS.HIGHLIGHTS_SHELF.addToCartBtn).should('be.visible');
-    });
-});
-
-Cypress.Commands.add('rightArrowProductHighlights', () => {
-    cy.get(ELEMENTS.HIGHLIGHTS_SHELF.sliderContainer).should('be.visible');
-    cy.get(ELEMENTS.HIGHLIGHTS_SHELF.rightArrow).eq(2).should('exist');
-    cy.get(ELEMENTS.HIGHLIGHTS_SHELF.rightArrow).eq(2).should('be.visible');
-});
-
-Cypress.Commands.add('LeftArrowProductHighlights', () => {
-    cy.get(ELEMENTS.HIGHLIGHTS_SHELF.leftArrow).eq(2).should('exist');
-    cy.get(ELEMENTS.HIGHLIGHTS_SHELF.leftArrow).eq(2).should('be.visible');
-});
-
-Cypress.Commands.add('validateAllSliderTrackContainers', () => {
-    cy.get(ELEMENTS.CATEGORY_CAROUSEL.categoryContainer).eq(3).each(($el, index, $list) => {
-        cy.wrap($el)
-            .should('exist')
+Cypress.Commands.add('bestSellerShelf', () => {
+    cy.get(ELEMENTS.BEST_SELLERS_SHELF.containerShelf).within(() => {
+        cy.get(ELEMENTS.BEST_SELLERS_SHELF.highlightProduct)
+            .should('contain.text', '6% OFF');
+        cy.get(ELEMENTS.BEST_SELLERS_SHELF.imgProduct)
+            .should('be.visible')
+            .and('have.attr', 'src')
+        cy.get(ELEMENTS.BEST_SELLERS_SHELF.nameProduct)
+            .should('be.visible')
+            .invoke('text')
+            .then((productName) => {
+                const trimmedProductName = productName.trim();
+                cy.log('The product name is: ' + trimmedProductName);
+                console.log('Product name captured: ', trimmedProductName);
+                expect(trimmedProductName).not.to.be.empty;
+            });
+        cy.get(ELEMENTS.BEST_SELLERS_SHELF.priceProduct)
+            .should('be.visible')
+            .each(($price) => {
+                const priceText = $price.text().trim();
+                cy.log('The price of the product is: ' + priceText);
+                console.log('Price captured: ', priceText);
+                expect(priceText).not.to.be.empty;
+                expect(priceText).to.match(/^R\$[\s\u00A0]?\d{1,3}(\.\d{3})*,\d{2}$/);
+            });
+        cy.get(ELEMENTS.BEST_SELLERS_SHELF.discountTicket)
+            .should('contain.text', 'à vista no pix');
+        cy.get(ELEMENTS.BEST_SELLERS_SHELF.discountPercentage)
+            .should('contain.text', '6% de desconto');
+        cy.get(ELEMENTS.BEST_SELLERS_SHELF.buttonAdd)
+            .should('contain.text', 'Adicionar')
             .and('be.visible');
     });
 });
 
-Cypress.Commands.add('validateBannerFraud', () => {
+Cypress.Commands.add('highlightShelf', () => {
+    cy.get(ELEMENTS.HIGHLIGHT_SHELF.containerShelf).within(() => {
+        cy.get(ELEMENTS.HIGHLIGHT_SHELF.highlightProduct)
+            .should('contain.text', '6% OFF');
+        cy.get(ELEMENTS.HIGHLIGHT_SHELF.imgProduct)
+            .should('be.visible')
+            .and('have.attr', 'src')
+        cy.get(ELEMENTS.HIGHLIGHT_SHELF.nameProduct)
+            .should('be.visible')
+            .invoke('text')
+            .then((productName) => {
+                const trimmedProductName = productName.trim();
+                cy.log('The product name is: ' + trimmedProductName);
+                console.log('Product name captured: ', trimmedProductName);
+                expect(trimmedProductName).not.to.be.empty;
+            });
+        cy.get(ELEMENTS.HIGHLIGHT_SHELF.priceProduct)
+            .should('be.visible')
+            .each(($price) => {
+                const priceText = $price.text().trim();
+                cy.log('The price of the product is: ' + priceText);
+                console.log('Price captured: ', priceText);
+                expect(priceText).not.to.be.empty;
+                expect(priceText).to.match(/^R\$[\s\u00A0]?\d{1,3}(\.\d{3})*,\d{2}$/);
+            });
+        cy.get(ELEMENTS.BEST_SELLERS_SHELF.discountTicket)
+            .should('contain.text', 'à vista no pix');
+        cy.get(ELEMENTS.BEST_SELLERS_SHELF.discountPercentage)
+            .should('contain.text', '6% de desconto');
+        cy.get(ELEMENTS.BEST_SELLERS_SHELF.buttonAdd)
+            .should('contain.text', 'Adicionar')
+            .and('be.visible');
+    });
+});
+
+Cypress.Commands.add('carouselCategory', () => {
+    cy.get(ELEMENTS.CATEGORY_CAROUSEL.containerCarousel).within(() => {
+        cy.get(ELEMENTS.CATEGORY_CAROUSEL.titleCarousel)
+            .should('be.visible')
+            .invoke('text')
+            .then((titleText) => {
+                const trimmedTitleText = titleText.trim();
+                cy.log('The title is: ' + trimmedTitleText);
+                console.log('Title captured: ', trimmedTitleText);
+                expect(trimmedTitleText).not.to.be.empty;
+            });
+        cy.get(ELEMENTS.CATEGORY_CAROUSEL.subtitleCarousel)
+            .should('be.visible')
+            .invoke('text')
+            .then((titleText) => {
+                const trimmedTitleText = titleText.trim();
+                cy.log('The title is: ' + trimmedTitleText);
+                console.log('Title captured: ', trimmedTitleText);
+                expect(trimmedTitleText).not.to.be.empty;
+            });
+        cy.get(ELEMENTS.CATEGORY_CAROUSEL.containerCategory).each(($el, index) => {
+            cy.wrap($el)
+                .find(ELEMENTS.CATEGORY_CAROUSEL.categoryText)
+                .invoke('text')
+                .then((category) => {
+                    cy.log(`Category ${index + 1}: ${category}`);
+                });
+            cy.wrap($el).should('be.visible');
+        });
+    })
+})
+Cypress.Commands.add('validateBannerFraud', (imgLinkHref, imgSrc, imgAlt) => {
     cy.get(ELEMENTS.BANNER_FRAUD.bannerContainer)
         .should('exist')
         .and('be.visible')
         .within(() => {
+            // Valida o link da imagem
             cy.get(ELEMENTS.BANNER_FRAUD.imgLink)
                 .should('exist')
-                .should('have.attr', 'href', '/fique-em-alerta');
+                .and('have.attr', 'href', imgLinkHref);
 
+            // Valida a imagem
             cy.get('img.vtex-store-components-3-x-imageElement')
                 .should('exist')
-                .and('have.attr', 'src', 'https://arcelormittal.vtexassets.com/assets/vtex.file-manager-graphql/images/696e547a-2ee4-42b6-9fd1-e0d84d7e05ff___94c1f96b86aba07808b2127c0ef14e15.jpg')
-                .and('have.attr', 'alt', 'Vantagens exclusivas');
+                .and('have.attr', 'src', imgSrc)
+                .and('have.attr', 'alt', imgAlt);
         });
+});
+Cypress.Commands.add('launchProductShelf', () => {
+    cy.window().scrollTo("bottom");
+    cy.get(ELEMENTS.LAUNCH_PRODUCT_SHELF.containerShelf).within(() => {
+        cy.get(ELEMENTS.LAUNCH_PRODUCT_SHELF.highlightProduct)
+            .should('contain.text', '6% OFF');
+        cy.get(ELEMENTS.LAUNCH_PRODUCT_SHELF.imgProduct)
+            .should('be.visible')
+            .and('have.attr', 'src')
+        cy.get(ELEMENTS.LAUNCH_PRODUCT_SHELF.nameProduct)
+            .should('be.visible')
+            .invoke('text')
+            .then((productName) => {
+                const trimmedProductName = productName.trim();
+                cy.log('The product name is: ' + trimmedProductName);
+                console.log('Product name captured: ', trimmedProductName);
+                expect(trimmedProductName).not.to.be.empty;
+            });
+        cy.get(ELEMENTS.LAUNCH_PRODUCT_SHELF.priceProduct)
+            .should('be.visible')
+            .each(($price) => {
+                const priceText = $price.text().trim();
+                cy.log('The price of the product is: ' + priceText);
+                console.log('Price captured: ', priceText);
+                expect(priceText).not.to.be.empty;
+                expect(priceText).to.match(/^R\$[\s\u00A0]?\d{1,3}(\.\d{3})*,\d{2}$/);
+            });
+        cy.get(ELEMENTS.LAUNCH_PRODUCT_SHELF.discountTicket)
+            .should('contain.text', 'à vista no pix');
+        cy.get(ELEMENTS.LAUNCH_PRODUCT_SHELF.discountPercentage)
+            .should('contain.text', '6% de desconto');
+        cy.get(ELEMENTS.LAUNCH_PRODUCT_SHELF.buttonAdd)
+            .should('contain.text', 'Adicionar')
+            .and('be.visible');
+    });
 });
 
 Cypress.Commands.add('mostSearchedShelf', () => {
